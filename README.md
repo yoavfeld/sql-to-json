@@ -1,7 +1,5 @@
 # sql-to-json
 
-# sql-to-json
-
 ## Synopsis
 
 This object is a generic tool to convert your sql tables to an any structured json object.
@@ -92,7 +90,46 @@ the structure file is a json file that describes the sql tables and the output j
 };
 ```
 #### output
-
+```
+{
+  "endpoints": [
+    {
+      "type": "generic",
+      "conf": {
+        "endpoint": "configuration"
+      },
+      "paths": [
+        "/sdk_click"
+      ]
+    },
+    {
+      "type": "videoPlayer",
+      "conf": {
+        "zubi": "zubi"
+      },
+      "paths": [
+        "/player",
+        "/zubbi"
+      ]
+    }
+  ],
+  "events": {
+    "sdk_postback": {
+      "tasks": [
+        "ironBeast",
+        {
+          "name": "yoav"
+        },
+        "url",
+        {
+          "url": "http://ya.ru/",
+          "method": "POST"
+        }
+      ]
+    }
+  }
+}
+```
 
 ### fields
 
