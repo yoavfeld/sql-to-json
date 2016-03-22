@@ -1,0 +1,20 @@
+{
+  "name": "sql-to-json",
+  "version": "1.0.0",
+  "description": "convert sql queries to json",
+  "main": "index.js",
+  "dependencies": {
+    "debug": "2.2.0",
+    "lodash": "4.6.1",
+    "log4js": "0.6.33"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "sql-to-json"
+  ],
+  "author": "Yoav Feldman <yoavfeld@gmail.com>",
+  "license": "ISC"
+}
