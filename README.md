@@ -158,6 +158,3 @@ in the memQuery you can use any sql that legal by npm [alasql library](https://w
 }
 ```
 
-### fields
-
-
