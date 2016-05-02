@@ -72,7 +72,7 @@ in the memQuery you can use any sql that legal by npm [alasql library](https://w
     "refField": "id",
     "fields": [{
         "type": "object",
-        "memQuery": "select dp.name, ac.name as activity_name from direct_publishers dp inner join activities ac on dp.activity_id = ac.id",
+        "memQuery": "select dp.name, ac.name as activity_name from direct_publishers dp inner join activities ac on dp.activity_id = ac.id where dp.id = ?",
         "fields": [{
             "dbName": "name",
             "name": "name",
