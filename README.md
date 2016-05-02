@@ -25,7 +25,7 @@ mySqlDbClient.end();
 ## structure file
 
 the structure file is a json file that describes the sql tables and the output json structure.
-the structure is an hierarchy object which each level is describe a level in the output json. each level can be one of two kinds: a simple level - descbribes a simple value in the json and a nested level that describes a list (object or array) of many simple or nested levels inside. a special level always have a "fields" key that contains an array of objects that describe the nested levels.
+the structure is an hierarchy object that each of its levels describes a level in the output json. each level can be: a simple level - descbribes a simple value in the json and a nested level that describes a list (object or array) of many simple or nested levels inside. a special level always have a "fields" key that contains an array of objects that describe the nested levels.
 
 ### keys description:
 
