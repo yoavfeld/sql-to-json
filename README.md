@@ -33,15 +33,15 @@ the structure is an hierarchy object that each of its levels describes a level i
 | ------------- |--------------------------------------------| ----------------| --------|
 | type      |the type of this level in the json |array, object, string, json |Yes|
 | query      | sql query of data from the db       |any sql query |No|
-| fields      | array of the fields of this elements (see fields sub headline below)       |array of objects|No|
+| fields      | array of the fields of this elements (see fields headline below)       |array of objects|No|
 | keyField | (can appear only when type=object of the first nested field) A field from the query that its values will be used as keys of the object's values        |name of a field from the query |No|
 | refField | A field or fields from the query that its values will be used as reference for the query of the nested fields of this level | string or array of strings (DB column names)|No|
 | dbName      | name of the db column of this field |string |only for simple levels|
 | name      | name of the key in the output json that will contain this value |string |only for simple levels|
 | nullable      | if true, create this field even if the db value is null or empty |string |No|
-| preLoadTables      | can apear only in the first level. an object that descripbes sql queries that will be executed in the begining of the sql-to-json process and could be accessed by memQuery queries. (see the example bellow) |object |No|
+| preLoadTables      |(can apear only in the first level) an object that descripbes sql queries that will be executed in the begining of the sql-to-json process and could be accessed by memQuery queries. (see the example bellow) |object |No|
 | memQuery      | an sql query from the memory. the table names that can be used in this queries are the keys in the preLoadTables object (see the example bellow)|string |No|
-| preDefinedKeys      |(can appear only for type=object)an array of hard coded strings that will be used as keys of the object (instead of query result for example)|array of strings |No|
+| preDefinedKeys      |(can appear only for type=object) an array of hard coded strings that will be used as keys of the object (instead of query result for example)|array of strings |No|
 
 #### fields 
 the fields array in the stucture json is used to describe the next level in the output json. fields should appear only when type is list (object or array).
