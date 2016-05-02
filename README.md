@@ -58,102 +58,91 @@ in the memQuery you can use any sql that legal by npm [alasql library](https://w
 #### structure file
 ```
 {
-	type: 'object',
-	preDefinedkeys: ['endpoints', 'events'],
-	fields: [
-		{
-			name: 'endpoints',
-			type: 'array',
-			query: `select id from endpoints`,
-			refField: 'id',
-			fields: [
-				{
-					type: 'object',
-					query: `select * from endpoints where id = ?`,
-					fields: [
-						{dbName: 'name', name: 'type', type: 'string'},
-						{dbName: 'conf', name: 'conf', type: 'json'},
-						{
-							name: 'paths',
-							type: 'array',
-							query: `select path from endpoints_paths where endpoint_id = ?`,
-							fields: [
-								{dbName: 'path', type: 'string'}
-							]
-						}
-					]
-				}
-			]
-		},
-		{
-			name: 'events',
-			type: 'object',
-			query: `select id, name from event`,
-			keyField: 'name',
-			refField: 'id', // field for the suns' references
-			fields: [
-				{
-					type: 'object',
-					preDefinedkeys: ['tasks'],
-					fields: [
-						{
-							name: 'tasks',
-							type: 'array',
-							query: `select tt.name, et.conf
-									    from event_tasks et
-									    inner join tasks tt
-									    on tt.id = et.task_id
-									    where et.event_id = ?`,
-							fields: [
-								{dbName: 'name', name: 'type' ,type: 'string'},
-								{dbName: 'conf', name: 'conf', type: 'json'},
-							]
-						}
-					]
-				}
-			]
-		}
-	]
-};
+    "type": "object",
+    "preLoadTables": {
+        "direct_publishers": "select * from direct_publishers",
+        "cost_models": "select * from cost_models",
+        "cost_models_countries": "select * from cost_models_countries",
+        "cost_model_types": "select * from cost_model_types",
+        "activities": "select * from activities",
+        "countries": "select * from countries"
+    },
+    "memQuery": "select id from direct_publishers",
+    "keyField": "id",
+    "refField": "id",
+    "fields": [{
+        "type": "object",
+        "memQuery": "select dp.name, ac.name as activity_name from direct_publishers dp inner join activities ac on dp.activity_id = ac.id",
+        "fields": [{
+            "dbName": "name",
+            "name": "name",
+            "type": "string"
+        }, {
+            "dbName": "activity_name",
+            "name": "activity",
+            "type": "string"
+        }, {
+            "name": "costModels",
+            "type": "object",
+            "nullable": true,
+            "memQuery": "select id, domain from cost_models where publisher_id = ?",
+            "keyField": "domain",
+            "refField": "id",
+            "fields": [{
+                "type": "object",
+                "memQuery": "select c.country_code from cost_models cm inner join cost_models_countries cmc on cm.id = cmc.cost_model_id inner join countries c on cmc.country_id = c.id where cm.id = ?",
+                "keyField": "country_code",
+                "fields": [{
+                    "type": "object",
+                    "memQuery": "select cmt.name as type_name, cm.value from cost_models cm inner join cost_model_types cmt on cm.type = cmt.id where cm.id = ?",
+                    "fields": [{
+                        "dbName": "type_name",
+                        "name": "type",
+                        "type": "string"
+                    }, {
+                        "dbName": "value",
+                        "name": "value",
+                        "type": "number"
+                    }]
+                }]
+            }]
+        }]
+    }]
+}
 ```
 #### output
 ```
 {
-  "endpoints": [
-    {
-      "type": "generic",
-      "conf": {
-        "endpoint": "configuration"
-      },
-      "paths": [
-        "/sdk_click"
-      ]
-    },
-    {
-      "type": "videoPlayer",
-      "conf": {
-        "zubi": "zubi"
-      },
-      "paths": [
-        "/player",
-        "/zubbi"
-      ]
-    }
-  ],
-  "events": {
-    "sdk_postback": {
-      "tasks": [
-        "ironBeast",
-        {
-          "name": "yoav"
+  "1": {
+    "name": "test",
+    "activity": "activity1",
+    "costModels": {
+      "abc": {
+        "A2": {
+          "type": "cpm",
+          "value": 2.2
         },
-        "url",
-        {
-          "url": "http://ya.ru/",
-          "method": "POST"
+        "AD": {
+          "type": "cpm",
+          "value": 2.2
         }
-      ]
+      },
+      "www.cnn.com": {
+        "IL": {
+          "type": "cpi",
+          "value": 2.2
+        },
+        "US": {
+          "type": "cpm",
+          "value": 2.2
+        }
+      }
     }
+  },
+  "2": {
+    "name": "test",
+    "activity": "activity2",
+    "costModels": {}
   }
 }
 ```
