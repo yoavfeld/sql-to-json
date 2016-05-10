@@ -8,7 +8,7 @@ the object gets a connected db client and a structure json object that describes
 ## Code Example
 
 ```
-const JsonToSql = require('sql-to-json');
+const SqlToJson = require('sql-to-json');
 const mysql = require('mysql'); // can be any sql db client with query method.
 
 const mySqlDbClient = mysql.createConnection({credentials object});
@@ -16,7 +16,7 @@ mySqlDbClient.connect();
 
 const struct = {};
 
-const instance = new JsonToSql(dbClient);
+const instance = new SqlToJson(dbClient);
 yield* instance.executeGen(struct);
 
 mySqlDbClient.end();
