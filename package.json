@@ -4,7 +4,7 @@
   "description": "convert sql queries to json",
   "main": "index.js",
   "dependencies": {
-    "alasql": "0.2.5",
+    "alasql": "0.2.6",
     "debug": "2.2.0",
     "lodash": "4.6.1",
     "log4js": "0.6.33"
