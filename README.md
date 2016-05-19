@@ -50,6 +50,8 @@ The fields array in the stucture json is used to describe the next level in the 
 
 In the query you can use any sql that will be legal by your DB. you can use paramter bindings that will be filled by the reference filed or fields of the last level that has refField key.
 
+* note: it is much better to use memQueriy and not query for preventing too many requests to your db and then getting better performances.
+
 #### memQuery
 
 In the memQuery you can use any sql that legal by npm [alasql library](https://www.npmjs.com/package/alasql). you can use paramter bindings that will be filled by the reference filed or fields of the last level that has refField key.
