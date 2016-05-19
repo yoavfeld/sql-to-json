@@ -98,7 +98,11 @@ In the memQuery you can use any sql that legal by npm [alasql library](https://w
                 "keyField": "country_code",
                 "fields": [{
                     "type": "object",
-                    "memQuery": "select cmt.name as type_name, cm.value from cost_models cm inner join cost_model_types cmt on cm.type = cmt.id where cm.id = ?",
+                    "memQuery": [
+                        "select c.country_code from cost_models cm inner join cost_models_countries cmc on cm.id =      
+                                cmc.cost_model_id inner join countries c on cmc.country_id = c.id where cm.id = ?",
+                        "select 'all' as country_code"
+                    ],
                     "fields": [{
                         "dbName": "type_name",
                         "name": "type",
