@@ -62,10 +62,10 @@ In the memQuery you can use any sql that legal by npm [alasql library](https://w
 {
     "type": "object",
     "preLoadTables": {
-        "direct_publishers": "select * from direct_publishers",
-        "cost_models": "select * from cost_models",
-        "cost_models_countries": "select * from cost_models_countries",
-        "cost_model_types": "select * from cost_model_types",
+        "direct_publishers": "select * from publishers",
+        "cost_models": "select * from costModels",
+        "cost_models_countries": "select * from cm_countries",
+        "cost_model_types": "select * from cm_types",
         "activities": "select * from activities",
         "countries": "select * from countries"
     },
@@ -120,12 +120,12 @@ In the memQuery you can use any sql that legal by npm [alasql library](https://w
     "activity": "activity1",
     "costModels": {
       "abc": {
-        "A2": {
-          "type": "cpm",
+        "AD": {
+          "type": "cpc",
           "value": 2.2
         },
-        "AD": {
-          "type": "cpm",
+        "US": {
+          "type": "cpi",
           "value": 2.2
         }
       },
