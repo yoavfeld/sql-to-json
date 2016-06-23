@@ -44,6 +44,7 @@ the structure is an hierarchy object that each of its levels describes a level i
 | preDefinedKeys      |(can appear only for type=object) an array of hard coded strings that will be used as keys of the object (instead of query result for example)|array of strings |No|
 | diver      | if true, set a nested object that the keys are the first [numOfKes] fields that apear in the query in this level. |boolean |No|
 | numOfKeys      | number of the first fields that apear in the query that should be keys of the nested object.|number |Yes - if diver=true|
+|logLevel | if set to DEBUG, sql-to-json will print debug info for the current level. usefull for debugging |"DEBUG"| No|
 
 #### fields 
 The fields array in the stucture json is used to describe the next level in the output json. fields should appear only when type is list (object or array).
@@ -52,7 +53,7 @@ The fields array in the stucture json is used to describe the next level in the 
 
 In the query you can use any sql that will be legal by your DB. you can use paramter bindings that will be filled by the reference filed or fields of the last level that has refField key.
 
-* note: it is much better to use memQueriy and not query for preventing too many requests to your db and then getting better performances.
+* note: it is much better to use memQuery and not query for preventing too many requests to your db and then getting better performances.
 
 #### memQuery
 
