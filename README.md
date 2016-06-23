@@ -41,7 +41,7 @@ the structure is an hierarchy object that each of its levels describes a level i
 | nullable      | if true, create this field even if the db value is null or empty |boolean |No|
 | preLoadTables      |(can apear only in the first level) an object that descripbes sql queries that will be executed in the begining of the sql-to-json process and could be accessed by memQuery queries. (see the example bellow) |object |No|
 | memQuery      | an sql query from the memory. the table names that can be used in this queries are the keys in the preLoadTables object (see the example bellow)|string or array of strings with sql queries |No|
-| preDefinedKeys      |(can appear only for type=object) an array of hard coded strings that will be used as keys of the object (instead of query result for example)|array of strings |No|
+| preDefinedkeys      |(can appear only for type=object) an array of hard coded strings that will be used as keys of the object (instead of query result for example)|array of strings |No|
 | diver      | if true, set a nested object that the keys are the first [numOfKes] fields that apear in the query in this level. |boolean |No|
 | numOfKeys      | number of the first fields that apear in the query that should be keys of the nested object.|number |Yes - if diver=true|
 |logLevel | if set to DEBUG, sql-to-json will print debug info for the current level. usefull for debugging |"DEBUG"| No|
