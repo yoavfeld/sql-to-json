@@ -14,10 +14,12 @@ const mysql = require('mysql'); // can be any sql db client with query method.
 const mySqlDbClient = mysql.createConnection({credentials object});
 mySqlDbClient.connect();
 
-const struct = {};
+const struct = {see structure file examples below};
 
 const instance = new SqlToJson(dbClient);
-yield* instance.executeGen(struct);
+const dataAsJson = yield* instance.executeGen(struct);
+
+fs.writeFileSync('output.json', JSON.stringify(dataAsJson));
 
 mySqlDbClient.end();
 ```
