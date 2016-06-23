@@ -1,6 +1,6 @@
 {
   "name": "sql-to-json",
-  "version": "1.4.2",
+  "version": "1.5.0",
   "description": "convert sql queries to json",
   "main": "index.js",
   "dependencies": {
