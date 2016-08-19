@@ -8,20 +8,32 @@ the object gets a connected db client and a structure json object that describes
 ## Code Example
 
 ```
+
+'use strict';
+const runAsyncGen = require('run-async-gen');
 const SqlToJson = require('sql-to-json');
 const mysql = require('mysql'); // can be any sql db client with query method.
+const fs = require('fs')
 
-const mySqlDbClient = mysql.createConnection({credentials object});
-mySqlDbClient.connect();
 
-const struct = {see structure file examples below};
+runAsyncGen(GenerateJsonFile(), function(err) {
+    if (err) {
+        console.log(err);
+        process.exit(1);
+    }
+    console.log('Done');
+});
 
-const instance = new SqlToJson(dbClient);
-const dataAsJson = yield* instance.executeGen(struct);
+function* GenerateJsonFile() {
+	const mySqlDbClient = mysql.createConnection({credentials object});
+	mySqlDbClient.connect();
 
-fs.writeFileSync('output.json', JSON.stringify(dataAsJson));
-
-mySqlDbClient.end();
+	const struct = {see structure file examples below};
+	const instance = new SqlToJson(mySqlDbClient);
+	const dataAsJson = yield* instance.executeGen(struct);
+	fs.writeFileSync('output.json', JSON.stringify(dataAsJson));
+	mySqlDbClient.end();
+}
 ```
 
 ## structure file
